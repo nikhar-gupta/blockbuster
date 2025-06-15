@@ -1,0 +1,39 @@
+.searchMain {
+  margin-bottom: 2rem;
+  /* margin-top: -1px; */
+  padding-top: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  /* justify-content: center; */
+}
+.searchMain .homeLogo {
+  width: 400px;
+}
+.searchMain .cardsImg {
+  margin: -4rem 0 -4rem 0;
+  width: 350px;
+}
+.searchMain .searchbar {
+  all: unset;
+  width: 350px;
+  height: 40px;
+  padding: 0 1rem;
+  color: rgba(168, 181, 219, 1);
+  background-color: rgba(15, 13, 35, 1);
+  border-radius: 10px;
+}
+.searchMain h1 span {
+  color: #ab8bff;
+}
+@media only screen and (min-width: 600px) {
+  .searchMain .homeLogo {
+    width: 500px;
+  }
+  .searchMain .searchbar {
+    all: unset;
+    width: 400px;
+  }
+}

@@ -1,0 +1,9 @@
+.homepage {
+  background: linear-gradient(rgba(3, 0, 20, 1), rgba(3, 0, 20, 1)),
+    url("/src/assets/BG.png"), url("/src/assets/Container.png");
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  min-height: 100vh;
+}

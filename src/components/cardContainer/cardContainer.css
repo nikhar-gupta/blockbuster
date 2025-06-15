@@ -1,0 +1,58 @@
+.cardContainerMain h1 {
+  text-align: center;
+  margin: 2rem 0;
+}
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.card {
+  width: 300px;
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(15, 13, 35, 1);
+  border-radius: 10px;
+  padding: 1rem 0;
+  transition: ease-out 0.2s;
+}
+
+.card .poster {
+  width: 90%;
+  margin: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card .movieInfo {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.card .movieInfo .movieName {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.card .movieInfo .movieShortInfo {
+  display: flex;
+  gap: 1rem;
+}
+.card .movieInfo .movieShortInfo img {
+  object-fit: contain;
+}
+.card .movieInfo .movieShortInfo .ratings {
+  margin-left: -0.7rem;
+}
+.card .movieInfo .movieShortInfo .genre {
+  color: rgba(156, 164, 171, 1);
+}
+
+.card:hover {
+  cursor: pointer;
+  scale: 1.06;
+}
