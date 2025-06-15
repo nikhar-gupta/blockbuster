@@ -36,8 +36,6 @@ const SignInPage = () => {
     setIsError("");
     let message;
     if (isSignInForm) {
-      console.log(email.current.value, password.current.value);
-
       message = validateForm(email.current.value, password.current.value);
       setIsError(message);
       if (message === null) {
