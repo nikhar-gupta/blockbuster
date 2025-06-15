@@ -49,8 +49,6 @@ const SignInPage = () => {
           .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            console.log("SignIn successfull!");
-            console.log(user);
             const { uid, email, displayName } = auth.currentUser;
             dispatch(
               addUser({ uid: uid, email: email, displayName: displayName })
@@ -97,8 +95,6 @@ const SignInPage = () => {
                 const errorMessage = error.message;
                 setIsError(errorCode + "-" + errorMessage);
               });
-            console.log("Signup successfull!");
-            console.log(user);
           })
           .catch((error) => {
             const errorCode = error.code;
