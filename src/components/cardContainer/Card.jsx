@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { genres } from "../../utils/data/genreList";
 import { useNavigate } from "react-router-dom";
+import star from "../../assets/Rating.png";
 
 const Card = forwardRef(({ poster, title, rating, genreIds, movieId }, ref) => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Card = forwardRef(({ poster, title, rating, genreIds, movieId }, ref) => {
       <div className="movieInfo">
         <p className="movieName">{title}</p>
         <div className="movieShortInfo">
-          <img src="src\assets\Rating.png" alt="star" />
+          <img src={star} alt="star" />
           <p className="ratings">{String(rating).substring(0, 3)}</p>
           <p className="genre">
             {matchedGenres.map((genre, index) => {
