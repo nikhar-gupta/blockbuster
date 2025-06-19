@@ -47,10 +47,14 @@ const SignInPage = () => {
           .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            const { uid, email, displayName } = auth.currentUser;
-            dispatch(
-              addUser({ uid: uid, email: email, displayName: displayName })
+            const { uid, email, displayName } = auth?.currentUser;
+
+            const localUser = localStorage.setItem(
+              "user",
+              JSON.stringify({ uid, email, displayName })
             );
+            dispatch(addUser(JSON.parse(localStorage.getItem("user"))));
+
             <Navigate to="/" />;
           })
           .catch((error) => {
@@ -83,9 +87,12 @@ const SignInPage = () => {
               .then(() => {
                 // Profile updated!
                 const { uid, email, displayName } = auth.currentUser;
-                dispatch(
-                  addUser({ uid: uid, email: email, displayName: displayName })
+
+                const localUser = localStorage.setItem(
+                  "user",
+                  JSON.stringify({ uid, email, displayName })
                 );
+                dispatch(addUser(JSON.parse(localStorage.getItem("user"))));
               })
               .catch((error) => {
                 // An error occurred

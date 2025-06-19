@@ -25,7 +25,13 @@ const Header = () => {
             <p>{"Hi " + user.displayName + "!"}</p>
           </div>
           <div className="signout">
-            <p onClick={() => dispatch(removeUser())}>Signout</p>
+            <p
+              onClick={() => {
+                dispatch(removeUser());
+              }}
+            >
+              Signout
+            </p>
           </div>
         </div>
       )}

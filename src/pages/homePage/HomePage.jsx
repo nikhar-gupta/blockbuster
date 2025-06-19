@@ -5,6 +5,8 @@ import usePopularMovies from "../../utils/hooks/usePopularMovies";
 import useSearchMovies from "../../utils/hooks/useSearchMovies";
 import { useDebounce } from "react-use";
 import "./homepage.css";
+import { useSelector } from "react-redux";
+import ShimmerMain from "../../components/shimmerUI/ShimmerMain";
 
 const HomePage = () => {
   const [searchText, setSearchText] = useState("");
@@ -12,10 +14,11 @@ const HomePage = () => {
   useDebounce(() => setDebouncedSearch(searchText), 1500, [searchText]);
   usePopularMovies();
   useSearchMovies(debouncedSearch);
+  const popularMovies = useSelector((store) => store.movies.popularMovies);
   return (
     <div className="homepage">
       <Search searchText={searchText} setSearchText={setSearchText} />
-      <CardContainer />
+      {popularMovies.length ? <CardContainer /> : <ShimmerMain />}
     </div>
   );
 };
