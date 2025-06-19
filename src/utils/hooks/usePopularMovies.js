@@ -12,8 +12,9 @@ const usePopularMovies = () => {
   const getPopularMovies = useCallback(async () => {
     try {
       const data = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
-        options
+        `https://api.themoviedb.org/3/movie/popular?language=en-US&api_key=${
+          import.meta.env.VITE_TMDB_API_KEY
+        }&page=${page}`
       );
       const json = await data.json();
       dispatch(addPopularMovies(json.results));
