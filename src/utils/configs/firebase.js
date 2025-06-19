@@ -2,7 +2,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -10,7 +9,7 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBVwy2oVeBcokR0r9Q1e5n9FmUYMgwMa3g",
+  apiKey: process.env.VITE_FIREBASE_API_KEY,
   authDomain: "blockbuster-ccbfb.firebaseapp.com",
   projectId: "blockbuster-ccbfb",
   storageBucket: "blockbuster-ccbfb.firebasestorage.app",
