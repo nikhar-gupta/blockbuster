@@ -23,7 +23,6 @@
 }
 
 .signIn-form input {
-  height: 1rem;
   width: 100%;
   height: 100%;
   cursor: pointer;
@@ -37,10 +36,15 @@
   font-size: 1rem;
 }
 .signIn-form #submit-form {
+  /* all: unset; */
   background: linear-gradient(90deg, #d6c7ff 0%, #ab8bff 100%);
-  border: none;
   font-weight: 700;
   color: #000;
+  height: 3rem;
+  border-radius: 5px;
+}
+.signIn-form #submit-form img {
+  max-height: 100%;
 }
 .signIn-form #error-mssg {
   color: rgb(229, 9, 20);

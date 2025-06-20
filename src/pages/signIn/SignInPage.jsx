@@ -1,24 +1,34 @@
 import { useRef, useState } from "react";
 import "./signInPage.css";
-import { validateForm } from "../../utils/configs/validateForm";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
-import { auth } from "../../utils/configs/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../utils/store/userSlice";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import handleSubmitLogic from "../../utils/configs/handleSubmitLogic";
+import loader from "../../assets/loader.svg";
 
 const SignInPage = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [isError, setIsError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const email = useRef(null);
   const password = useRef(null);
   const confirmPassword = useRef(null);
   const name = useRef(null);
+  const handleSubmit = (e) => {
+    handleSubmitLogic(
+      e,
+      setIsError,
+      isSignInForm,
+      email,
+      password,
+      confirmPassword,
+      name,
+      dispatch,
+      navigate,
+      setIsLoading
+    );
+  };
 
   const toggleSignInForm = () => {
     email.current.value = "";
@@ -29,85 +39,6 @@ const SignInPage = () => {
       name.current.value = "";
     }
     setIsSignInForm(!isSignInForm);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsError("");
-    let message;
-    if (isSignInForm) {
-      message = validateForm(email.current.value, password.current.value);
-      setIsError(message);
-      if (message === null) {
-        signInWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        )
-          .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            const { uid, email, displayName } = auth?.currentUser;
-
-            const localUser = localStorage.setItem(
-              "user",
-              JSON.stringify({ uid, email, displayName })
-            );
-            dispatch(addUser(JSON.parse(localStorage.getItem("user"))));
-
-            <Navigate to="/" />;
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setIsError(errorCode + "-" + errorMessage);
-          });
-      }
-    } else {
-      message = validateForm(
-        email.current.value,
-        password.current.value,
-        confirmPassword.current.value,
-        name.current.value
-      );
-      setIsError(message);
-      if (message === null) {
-        createUserWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        )
-          .then((userCredential) => {
-            // Signed up
-            const user = userCredential.user;
-            updateProfile(user, {
-              displayName: name.current.value,
-              photoURL: "../../assets/default-prof-pic.jpg",
-            })
-              .then(() => {
-                // Profile updated!
-                const { uid, email, displayName } = auth.currentUser;
-
-                const localUser = localStorage.setItem(
-                  "user",
-                  JSON.stringify({ uid, email, displayName })
-                );
-                dispatch(addUser(JSON.parse(localStorage.getItem("user"))));
-              })
-              .catch((error) => {
-                // An error occurred
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                setIsError(errorCode + "-" + errorMessage);
-              });
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setIsError(errorCode + "-" + errorMessage);
-          });
-      }
-    }
   };
 
   return (
@@ -127,11 +58,15 @@ const SignInPage = () => {
           />
         )}
         <p id="error-mssg">{isError}</p>
-        <input
-          type="submit"
-          value={isSignInForm ? "Sign In" : "Sign Up"}
-          id="submit-form"
-        />
+        <button type="submit" id="submit-form">
+          {isLoading ? (
+            <img src={loader} alt="Loading" />
+          ) : isSignInForm ? (
+            "Sign In"
+          ) : (
+            "Sign Up"
+          )}
+        </button>
         <p className="new-user">
           {isSignInForm ? "New to Blockbuster?" : "Already a Member?"}{" "}
           <a onClick={toggleSignInForm}>

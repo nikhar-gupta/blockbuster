@@ -5,9 +5,8 @@ const useGetTrailerVideo = (id, trailerUrl, setTrailerUrl) => {
   const getTrailerVideo = async () => {
     try {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${
-          import.meta.env.VITE_TMDB_API_KEY
-        }`
+        `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
+        options
       );
       const data = await res.json();
       const trailers = data.results.filter((video) => video.type === "Trailer");
