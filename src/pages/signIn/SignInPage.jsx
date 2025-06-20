@@ -43,18 +43,36 @@ const SignInPage = () => {
 
   return (
     <div className="signIn-main">
-      <form className="signIn-form" onSubmit={handleSubmit}>
+      <form className="signIn-form" name="signInForm" onSubmit={handleSubmit}>
         <h1>Sign In</h1>
         {!isSignInForm && (
-          <input type="text" placeholder="Full Name" ref={name} />
+          <input
+            type="text"
+            placeholder="Full Name"
+            ref={name}
+            name="name"
+            autoComplete="name"
+          />
         )}
-        <input type="email" placeholder="Email ID" ref={email} />
-        <input type="password" placeholder="Password" ref={password} />
+        <input
+          type="email"
+          placeholder="Email ID"
+          ref={email}
+          name="email"
+          autoComplete="email"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          ref={password}
+          name="password"
+        />
         {!isSignInForm && (
           <input
             type="password"
             placeholder="Confirm Password"
             ref={confirmPassword}
+            name="confirmPassword"
           />
         )}
         <p id="error-mssg">{isError}</p>

@@ -15,7 +15,7 @@ export const validateForm = (email, password, confirmPassword, name) => {
   } else if (!validatePassword) {
     return `Password must:
     - be at least 8 characters long
-    - contain at least one letter
+    - contain at least one special character
     - contain at least one uppercase letter (A-Z)
     - contain at least one lowercase letter (a-z)
     - contain at least one digit (0-9)`;

@@ -35,8 +35,8 @@ const handleSubmitLogic = (
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          const { uid, email, displayName } = auth?.currentUser;
-
+          const { uid, email, displayName } = user;
+          // console.log(user);
           localStorage.setItem(
             "user",
             JSON.stringify({ uid, email, displayName })
