@@ -1,20 +1,16 @@
 import { forwardRef } from "react";
 import { genres } from "../../utils/data/genreList";
-import { useNavigate } from "react-router-dom";
 import star from "../../assets/Rating.png";
 import noPoster from "../../assets/No-Poster.png";
 
 const Card = forwardRef(({ poster, title, rating, genreIds, movieId }, ref) => {
-  const navigate = useNavigate();
   const matchedGenres = genres
     .filter((genre) => genreIds?.includes(genre.id))
     .map((genre) => genre.name)
     .slice(0, 2);
-  const handleMovieCardClick = () => {
-    navigate("/movie/" + movieId);
-  };
+
   return (
-    <div className="card" ref={ref} onClick={handleMovieCardClick}>
+    <div className="card" id={movieId} ref={ref}>
       <img
         className="poster"
         src={

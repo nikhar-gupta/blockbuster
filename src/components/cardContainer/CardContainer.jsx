@@ -1,12 +1,18 @@
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import "./cardContainer.css";
+import { useNavigate } from "react-router-dom";
 const CardContainer = ({ lastElementRef }) => {
   const searchMovies = useSelector((store) => store?.movies?.searchMovies);
   const storedPopularMovies = useSelector(
     (store) => store?.movies?.popularMovies
   );
-
+  const navigate = useNavigate();
+  const handleCardClick = (e) => {
+    (e.target.parentElement.className === "card" ||
+      e.target.parentElement.parentElement.className === "card") &&
+      navigate("movie/" + e.target.parentElement.id);
+  };
   return (
     <div className="cardContainerMain">
       {searchMovies?.length === 0 ? (
@@ -14,7 +20,7 @@ const CardContainer = ({ lastElementRef }) => {
       ) : (
         <h1>Search Results</h1>
       )}
-      <div className="cardContainer">
+      <div className="cardContainer" onClick={(e) => handleCardClick(e)}>
         {(searchMovies?.length === 0 ? storedPopularMovies : searchMovies)?.map(
           (movie, index) => {
             const isLast = index === storedPopularMovies?.length - 1;
