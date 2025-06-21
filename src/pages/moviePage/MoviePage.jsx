@@ -42,7 +42,7 @@ const MoviePage = () => {
           <div className="right">
             <img src={Rating} alt="star" />
             <p>
-              {movieInfo[0]?.vote_average +
+              {String(movieInfo[0]?.vote_average).substring(0, 3) +
                 "/10 (" +
                 movieInfo[0]?.vote_count +
                 ")"}
