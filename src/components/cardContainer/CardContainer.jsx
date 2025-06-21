@@ -1,13 +1,11 @@
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import "./cardContainer.css";
-import usePopularMovies from "../../utils/hooks/usePopularMovies";
-const CardContainer = () => {
+const CardContainer = ({ lastElementRef }) => {
   const searchMovies = useSelector((store) => store?.movies?.searchMovies);
   const storedPopularMovies = useSelector(
     (store) => store?.movies?.popularMovies
   );
-  const { lastElementRef, popularMovies } = usePopularMovies();
 
   return (
     <div className="cardContainerMain">
@@ -20,8 +18,6 @@ const CardContainer = () => {
         {(searchMovies?.length === 0 ? storedPopularMovies : searchMovies)?.map(
           (movie, index) => {
             const isLast = index === storedPopularMovies?.length - 1;
-            console.log(isLast);
-
             return (
               <Card
                 key={movie.id}

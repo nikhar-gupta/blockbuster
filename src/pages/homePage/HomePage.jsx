@@ -13,12 +13,17 @@ const HomePage = () => {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   useDebounce(() => setDebouncedSearch(searchText), 1500, [searchText]);
   useSearchMovies(debouncedSearch);
-  usePopularMovies();
-  const popularMovies = useSelector((store) => store.movies.popularMovies);
+  const { lastElementRef } = usePopularMovies();
+
+  const popularMovies = useSelector((store) => store?.movies.popularMovies);
   return (
     <div className="homepage">
       <Search searchText={searchText} setSearchText={setSearchText} />
-      {popularMovies.length ? <CardContainer /> : <ShimmerMain />}
+      {popularMovies.length ? (
+        <CardContainer lastElementRef={lastElementRef} />
+      ) : (
+        <ShimmerMain />
+      )}
     </div>
   );
 };

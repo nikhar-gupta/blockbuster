@@ -16,7 +16,6 @@ const usePopularMovies = () => {
         options
       );
       const json = await data.json();
-
       dispatch(addPopularMovies(json.results));
     } catch (error) {
       console.error("Error fetching popular movies:", error);
@@ -30,14 +29,11 @@ const usePopularMovies = () => {
   // 🔻 Intersection Observer to detect scroll end
   const lastElementRef = useCallback((node) => {
     if (observerRef.current) observerRef.current.disconnect();
-
     observerRef.current = new IntersectionObserver((entries) => {
-      console.log("Intersection triggered");
       if (entries[0].isIntersecting) {
         setPage((prevPage) => prevPage + 1);
       }
     });
-
     if (node) observerRef.current.observe(node);
   }, []);
 
