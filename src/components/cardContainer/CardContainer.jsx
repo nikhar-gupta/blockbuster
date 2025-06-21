@@ -4,6 +4,9 @@ import "./cardContainer.css";
 import usePopularMovies from "../../utils/hooks/usePopularMovies";
 const CardContainer = () => {
   const searchMovies = useSelector((store) => store?.movies?.searchMovies);
+  const storedPopularMovies = useSelector(
+    (store) => store?.movies?.popularMovies
+  );
   const { lastElementRef, popularMovies } = usePopularMovies();
 
   return (
@@ -14,9 +17,11 @@ const CardContainer = () => {
         <h1>Search Results</h1>
       )}
       <div className="cardContainer">
-        {(searchMovies?.length === 0 ? popularMovies : searchMovies)?.map(
+        {(searchMovies?.length === 0 ? storedPopularMovies : searchMovies)?.map(
           (movie, index) => {
-            const isLast = index === popularMovies?.length - 1;
+            const isLast = index === storedPopularMovies?.length - 1;
+            console.log(isLast);
+
             return (
               <Card
                 key={movie.id}

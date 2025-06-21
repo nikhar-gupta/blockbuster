@@ -12,8 +12,8 @@ const HomePage = () => {
   const [searchText, setSearchText] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   useDebounce(() => setDebouncedSearch(searchText), 1500, [searchText]);
-  usePopularMovies();
   useSearchMovies(debouncedSearch);
+  usePopularMovies();
   const popularMovies = useSelector((store) => store.movies.popularMovies);
   return (
     <div className="homepage">
